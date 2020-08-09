@@ -15,7 +15,6 @@
             <artifactId>javafaker</artifactId>
             <version>1.0.2</version>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.testng/testng -->
         <dependency>
             <groupId>org.testng</groupId>
@@ -23,7 +22,6 @@
             <version>7.1.0</version>
             <scope>test</scope>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -37,8 +35,8 @@
             <artifactId>webdrivermanager</artifactId>
             <version>4.1.0</version>
         </dependency>
-
     </dependencies>
+
 
     <build>
         <plugins>
@@ -53,10 +51,5 @@
             </plugin>
         </plugins>
     </build>
-
-
-
-
-
 
 </project>
