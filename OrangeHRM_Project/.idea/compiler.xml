@@ -10,5 +10,10 @@
         <module name="OrangeHRM" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="module-jdk-11" target="1.5" />
+      <module name="module-jdk-14" target="1.5" />
+      <module name="module-jdk-8" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>

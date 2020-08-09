@@ -7,8 +7,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-
-
+import java.util.concurrent.TimeUnit;
 
 
 public class OrangeHRM_Test {
@@ -21,7 +20,7 @@ public class OrangeHRM_Test {
     public void setUp(){
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-       // driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         driver.get("https://orangehrm-demo-6x.orangehrmlive.com/auth/login");
         wait = new WebDriverWait(driver, 20);
