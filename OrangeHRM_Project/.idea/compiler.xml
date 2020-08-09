@@ -6,12 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="module-jdk-8" />
-        <module name="OrangeHRM" />
-        <module name="module-jdk-14" />
         <module name="OrangeHRM_Project" />
-        <module name="module-jdk-11" />
+        <module name="OrangeHRM" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="module-jdk-11" target="1.5" />
+      <module name="module-jdk-14" target="1.5" />
+      <module name="module-jdk-8" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>
