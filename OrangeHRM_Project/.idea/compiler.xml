@@ -6,8 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="OrangeHRM_Project" />
+        <module name="module-jdk-8" />
         <module name="OrangeHRM" />
+        <module name="module-jdk-14" />
+        <module name="OrangeHRM_Project" />
+        <module name="module-jdk-11" />
       </profile>
     </annotationProcessing>
   </component>
