@@ -35,15 +35,13 @@ public class OrangeHRM_Test {
 
     
     @Test
-    public void loginAsA() throws InterruptedException { // victoria
+    public void loginAsA() { // victoria
        loginAsAdministrator();
 
         driver.findElement(By.xpath("//a//span[text()='Admin']")).click();
         driver.findElement(By.xpath("//li[@id='menu_news_Announcements']//span[text()='Announcements']")).click();
         driver.findElement(By.xpath("//a[@id='menu_news_viewNewsList']//span[text()='News']")).click();
 
-        driver.switchTo().parentFrame();
-        Thread.sleep(3000);
         driver.switchTo().frame("noncoreIframe");
 
         List<String> topic = new ArrayList<>();
