@@ -46,7 +46,6 @@ public class OrangeHRM_Test {
 
     @AfterMethod
     public void tearDown() {
-
         driver.quit();
     }
 
@@ -91,9 +90,7 @@ public class OrangeHRM_Test {
         driver.switchTo().parentFrame();
 
         // click next btn
-        WebElement nextBtn = driver.findElement(By.xpath("//button[text()='Next']"));
-        wait.until(ExpectedConditions.visibilityOf(nextBtn));
-        nextBtn.click();
+        driver.findElement(By.xpath("//button[text()='Next']")).click();
 
         // check Publish To - All User Roles
         driver.findElement(By.xpath("//label[@ for='news_publish_all']")).click();
