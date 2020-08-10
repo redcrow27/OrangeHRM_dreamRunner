@@ -46,6 +46,7 @@ public class OrangeHRM_Test {
 
     @AfterMethod
     public void tearDown() {
+
         driver.quit();
     }
 
@@ -81,9 +82,9 @@ public class OrangeHRM_Test {
 
         // fill description
         LocalDate today = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM YYYY");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/YYYY");
         String formattedDate = formatter.format(today);
-        String descriptionInput = "Promotion was awarded to dreamRunner -";
+        String descriptionInput = "Promotion was awarded to dreamRunner on";
         WebElement description = driver.findElement(By.xpath("//body[@id='tinymce']"));
         description.sendKeys(descriptionInput + " " + formattedDate);
 
