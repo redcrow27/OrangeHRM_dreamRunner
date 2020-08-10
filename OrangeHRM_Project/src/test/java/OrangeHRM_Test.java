@@ -10,10 +10,10 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeUnit;
-
 import static org.testng.Assert.assertEquals;
 
 
@@ -24,7 +24,7 @@ public class OrangeHRM_Test {
 
 
     @BeforeMethod
-    public void setUp(){
+    public void setUp() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -35,6 +35,46 @@ public class OrangeHRM_Test {
 
     
     @Test
+    public void loginAsA() throws InterruptedException { // victoria
+       loginAsAdministrator();
+
+        driver.findElement(By.xpath("//a//span[text()='Admin']")).click();
+        driver.findElement(By.xpath("//li[@id='menu_news_Announcements']//span[text()='Announcements']")).click();
+        driver.findElement(By.xpath("//a[@id='menu_news_viewNewsList']//span[text()='News']")).click();
+
+        driver.switchTo().parentFrame();
+        Thread.sleep(3000);
+        driver.switchTo().frame("noncoreIframe");
+
+        List<String> topic = new ArrayList<>();
+        List<String> date = new ArrayList<>();
+        List<String> userRoles = new ArrayList<>();
+        List<String> attacment = new ArrayList<>();
+        List<WebElement> el = driver.findElements(By.xpath("//i[starts-with(@class, 'material-icons attachment')]"));
+
+        for(int i = 1 ; i < 24; i++) {
+            topic.add(driver.findElement(By.xpath("((//table[@id='resultTable']//tbody/tr)["+i+"]/td)[2]")).getText());
+            date.add(driver.findElement(By.xpath("((//table[@id='resultTable']//tbody/tr)["+i+"]/td)[3]")).getText());
+            userRoles.add(driver.findElement(By.xpath("((//table[@id='resultTable']//tbody/tr)["+i+"]/td)[6]")).getText());
+            attacment.add(driver.findElement(By.xpath("((//table[@id='resultTable']//tbody/tr)["+i+"]/td)[7]")).getText());
+        }
+        System.out.println("count of news : " + topic.size());
+        System.out.println();
+
+
+        for(int i = 0; i < topic.size(); i++) {
+            if(el.get(i).getAttribute("parent_id").equals("10")) {
+                System.out.println(topic.get(i) + " | " + date.get(i) + " | " + userRoles.get(i) +
+                        " | " + attacment.get(i) + " - Yes");
+            } else {
+                System.out.println(topic.get(i) + " | " + date.get(i) + " | " + userRoles.get(i) +
+                        " | " + attacment.get(i) + " - No");
+            }
+        }
+    }
+
+
+    @Test
     public void VerifNewNewsPosted () { // erdi
         addNewNewsItem();
 
@@ -42,10 +82,9 @@ public class OrangeHRM_Test {
         String actual = driver.findElement(By.xpath("//a[text()='Congratulations dreamRunner']")).getText();
         assertEquals(expected, actual);
     }
-
-
+    
     @AfterMethod
-    public void tearDown() {
+   public void tearDown(){
         driver.quit();
     }
 
@@ -99,8 +138,5 @@ public class OrangeHRM_Test {
         driver.findElement(By.xpath("//button[text()='Publish']")).click();
 
     }
-
-
-
-
 }
+
