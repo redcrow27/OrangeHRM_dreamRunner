@@ -30,6 +30,15 @@ public class OrangeHRM_Test {
     }
 
 
+    @Test
+    public void loginSupervisor() throws InterruptedException{
+        WebElement login = driver.findElement(By.xpath("//button[@class='btn btn-primary dropdown-toggle']"));
+        login.click();
+        WebElement admin = driver.findElement(By.xpath("(//a[@class='login-as'])[4]"));
+        admin.click();
+
+    }
+
 
 
 
