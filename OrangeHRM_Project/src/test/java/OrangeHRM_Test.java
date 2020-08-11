@@ -82,6 +82,14 @@ public class OrangeHRM_Test {
         }
     }
 
+    @Test
+    public void VerifNewNewsPostedE () { // erdi
+        addNewNewsItem();
+        String expected = "Congratulations dreamRunner";
+        String actual = driver.findElement(By.xpath("//a[text()='Congratulations dreamRunner']")).getText();
+        assertEquals(expected, actual);
+    }
+
 
     @Test
     public void VerifNewNewsPosted () { // Asim
