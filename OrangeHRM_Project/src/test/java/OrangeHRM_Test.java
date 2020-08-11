@@ -143,7 +143,7 @@ public class OrangeHRM_Test {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/YYYY");
         String formattedDate = formatter.format(today);
         String actual2 = driver.findElement(By.xpath("//*[contains(text(),'Promotion was awarded to dreamRunner on')]")).getText().trim();
-        String expected2 = "Promotion was awarded to dreamRunner on" + formattedDate;
+        String expected2 = "Promotion was awarded to dreamRunner on " + formattedDate;
         assertEquals(actual2, expected2);
     }
 
