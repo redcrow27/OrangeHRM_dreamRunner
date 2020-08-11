@@ -8,6 +8,7 @@
     <artifactId>OrangeHRM</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+
     <dependencies>
         <!-- https://mvnrepository.com/artifact/com.github.javafaker/javafaker -->
         <dependency>
@@ -15,7 +16,6 @@
             <artifactId>javafaker</artifactId>
             <version>1.0.2</version>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.testng/testng -->
         <dependency>
             <groupId>org.testng</groupId>
@@ -23,12 +23,11 @@
             <version>7.1.0</version>
             <scope>test</scope>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>[3.141.59,]</version>
+            <version>3.141.59</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
@@ -37,7 +36,6 @@
             <artifactId>webdrivermanager</artifactId>
             <version>4.1.0</version>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -47,16 +45,12 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>[1.8, ]</source>
+                    <target>[1.8, ]</target>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
-
-
-
 
 
 </project>
