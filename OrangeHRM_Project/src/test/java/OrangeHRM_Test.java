@@ -46,13 +46,15 @@ public class OrangeHRM_Test {
         List<String> userRoles = new ArrayList<>();
         List<String> attacment = new ArrayList<>();
         List<WebElement> el = driver.findElements(By.xpath("//i[starts-with(@class, 'material-icons attachment')]"));
-        for (int i = 1; i < 24; i++) {
+        List<WebElement> size = driver.findElements(By.xpath("(//table[@id='resultTable']//tbody/tr)"));
+
+        for (int i = 1; i < size.size() + 1; i++) {
             topic.add(driver.findElement(By.xpath("((//table[@id='resultTable']//tbody/tr)[" + i + "]/td)[2]")).getText());
             date.add(driver.findElement(By.xpath("((//table[@id='resultTable']//tbody/tr)[" + i + "]/td)[3]")).getText());
             userRoles.add(driver.findElement(By.xpath("((//table[@id='resultTable']//tbody/tr)[" + i + "]/td)[6]")).getText());
             attacment.add(driver.findElement(By.xpath("((//table[@id='resultTable']//tbody/tr)[" + i + "]/td)[7]")).getText());
         }
-        System.out.println("count of news : " + topic.size());
+        System.out.println("count of news : " + size.size());
         currentsize = topic.size();
         System.out.println();
         for (int i = 0; i < topic.size(); i++) {
