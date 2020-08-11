@@ -136,6 +136,13 @@ public class OrangeHRM_Test {
         String actual = driver.findElement(By.xpath("//*[contains(text(),'Congratulations dreamRunner')]")).getText().trim();
         String expected = "Congratulations dreamRunner";
         assertEquals(actual, expected);
+        // verify description
+        LocalDate today = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/YYYY");
+        String formattedDate = formatter.format(today);
+        String actual2 = driver.findElement(By.xpath("//*[contains(text(),'Promotion was awarded to dreamRunner on')]")).getText().trim();
+        String expected2 = "Promotion was awarded to dreamRunner on" + formattedDate;
+        assertEquals(actual2, expected2);
     }
 
     @Test
@@ -152,16 +159,11 @@ public class OrangeHRM_Test {
         driver.findElement(By.xpath("//*[@id='news-delete-button']")).click();
         List<WebElement> newstopic = driver.findElements(By.xpath("//a[@class='newsTopic']"));
         for (int i = 0; i < newstopic.size(); i++) {
-            if ((newstopic.get(i).getText().contains("Congratulations dreamRunner")))
+            if ((newstopic.get(i).getText().contains("Congratulations dreamRunner"))|| i == newstopic.size()-1) {
                 System.out.println("DELETED");
+            }
         }
-        // verify description
-        LocalDate today = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/YYYY");
-        String formattedDate = formatter.format(today);
-        String actual2 = driver.findElement(By.xpath("//*[contains(text(),'Promotion was awarded to dreamRunner on')]")).getText().trim();
-        String expected2 = "Promotion was awarded to dreamRunner on " + formattedDate;
-        assertEquals(actual2, expected2);
+
     }
 
     @AfterMethod
