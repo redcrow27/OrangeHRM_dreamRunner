@@ -150,7 +150,7 @@ public class OrangeHRM_Test {
         driver.findElement(By.xpath("//*[@id='news-delete-button']")).click();
         List<WebElement> newstopic = driver.findElements(By.xpath("//a[@class='newsTopic']"));
         for (int i = 0; i < newstopic.size(); i++) {
-            if (!(newstopic.get(i).getText().contains("Congratulations dreamRunner")) || i == newstopic.size() - 1)
+            if ((newstopic.get(i).getText().contains("Congratulations dreamRunner")))
                 System.out.println("DELETED");
         }
         // verify description
