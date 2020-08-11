@@ -137,7 +137,7 @@ public class OrangeHRM_Test {
     }
 
     @Test
-    public void administration() {
+    public void administration() { // Korn
         driver.findElement(By.tagName("button")).click();
         driver.findElement(By.xpath("//*[(text()='Administrator')]")).click();
         driver.findElement(By.xpath("//span[contains(text(),'Admin')]")).click();
