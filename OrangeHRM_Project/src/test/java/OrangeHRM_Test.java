@@ -43,6 +43,29 @@ public class OrangeHRM_Test {
         wait = new WebDriverWait(driver, 20);
     }
 
+
+    public void logIn1stLevelSupervisor() { // Lena
+        WebElement login = driver.findElement(By.xpath("//button[@class='btn btn-primary dropdown-toggle']"));
+        login.click();
+        WebElement levelSupervisor = driver.findElement(By.xpath("//a[text()='1st Level Supervisor']"));
+        levelSupervisor.click();
+    }
+    @Test
+    public void verifyNewlyAdd()  { // Lena
+        logIn1stLevelSupervisor();
+
+        // verify topic
+        String actual = driver.findElement(By.xpath("//*[contains(text(),'Congratulations dreamRunner')]")).getText().trim();
+        String expected = "Congratulations dreamRunner";
+        assertEquals(actual, expected);
+
+        // verify description
+        String actual2 = driver.findElement(By.xpath("//*[contains(text(),'Promotion was awarded to dreamRunner on')]")).getText().trim();
+        String expected2 = "Promotion was awarded to dreamRunner on 8/10/2020";
+        assertEquals(actual2, expected2);
+
+    }
+
     
     @Test
     public void loginAsA() { // victoria
