@@ -15,10 +15,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeUnit;
 import static org.testng.Assert.assertEquals;
-
-
 public class OrangeHRM_Test {
-    int currentsize;
+        int currentsize;
     int differences = 0;
     int updatesize;
     WebDriver driver = null;
@@ -75,8 +73,6 @@ public class OrangeHRM_Test {
         String actual = driver.findElement(By.xpath("//a[text()='Congratulations dreamRunner']")).getText();
         assertEquals(expected, actual);
     }
-
-   
 
     public void loginAsAdministrator() { // erdi
         driver.findElement(By.xpath("//button[@type='button']")).click();
