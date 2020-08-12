@@ -107,13 +107,16 @@ public class OrangeHRM_Test {
         // click publish
         driver.findElement(By.xpath("//button[text()='Publish']")).click();
 
-        //verify Asim
-        Assert.assertEquals(currentsize + differences, updatesize, "Size of the table is not updated");
-        String expectedtopic = "Congratulations dreamRunner";
-        String actualtopic = driver.findElement(By.xpath("//td/a[text()='Congratulations dreamRunner']")).getText();
-        System.out.println("actualtopic: " + actualtopic);
-        Assert.assertEquals(actualtopic, expectedtopic);
     }
+        @Test
+        public void verifyDreamRunner() {  //Asim
+
+            Assert.assertEquals(currentsize + differences, updatesize, "Size of the table is not updated");
+            String expectedtopic = "Congratulations dreamRunner";
+            String actualtopic = driver.findElement(By.xpath("//td/a[text()='Congratulations dreamRunner']")).getText();
+            System.out.println("actualtopic: " + actualtopic);
+            Assert.assertEquals(actualtopic, expectedtopic);
+        }
 
     @Test
     public void logIn1stLevelSupervisor() { // Lena
