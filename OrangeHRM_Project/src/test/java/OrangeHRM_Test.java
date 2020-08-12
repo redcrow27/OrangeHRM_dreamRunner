@@ -9,18 +9,22 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
 import java.util.concurrent.TimeUnit;
 import java.util.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeUnit;
+
 import static org.testng.Assert.assertEquals;
+
 public class OrangeHRM_Test {
     int currentsize;
     int differences = 0;
     int updatesize;
     WebDriver driver = null;
     WebDriverWait wait = null;
+
     @BeforeMethod
     public void setUp() {
         WebDriverManager.chromedriver().setup();
@@ -30,6 +34,7 @@ public class OrangeHRM_Test {
         driver.get("https://orangehrm-demo-6x.orangehrmlive.com/auth/login");
         wait = new WebDriverWait(driver, 20);
     }
+
     @Test
     public void loginAsA() { // victoria
         loginAsAdministrator();
@@ -76,6 +81,7 @@ public class OrangeHRM_Test {
         driver.findElement(By.xpath("//button[@type='button']")).click();
         driver.findElement(By.xpath("//a[text()='Administrator']")).click();
     }
+
     public void addNewNewsItem() { //erdi
         loginAsAdministrator();
         // click admin > announcements > news bnts
@@ -108,15 +114,19 @@ public class OrangeHRM_Test {
         driver.findElement(By.xpath("//button[text()='Publish']")).click();
 
     }
-        @Test
-        public void verifyDreamRunner() {  //Asim
 
-            Assert.assertEquals(currentsize + differences, updatesize, "Size of the table is not updated");
-            String expectedtopic = "Congratulations dreamRunner";
-            String actualtopic = driver.findElement(By.xpath("//td/a[text()='Congratulations dreamRunner']")).getText();
-            System.out.println("actualtopic: " + actualtopic);
-            Assert.assertEquals(actualtopic, expectedtopic);
-        }
+    @Test
+    public void verifyDreamRunner() throws InterruptedException {  //Asim
+        loginAsAdministrator();
+        driver.findElement(By.xpath("//span[text()='Admin']")).click();
+        driver.findElement(By.xpath("//span[text()='Announcements']")).click();
+        driver.findElement(By.xpath("//span[text()='News']")).click();
+        driver.switchTo().frame("noncoreIframe");
+        String expectedtopic = "Congratulations dreamRunner";
+        String actualtopic = driver.findElement(By.xpath("//td/a[text()='Congratulations dreamRunner']")).getText();
+        System.out.println("actualtopic: " + actualtopic);
+        Assert.assertEquals(actualtopic, expectedtopic);
+    }
 
     @Test
     public void logIn1stLevelSupervisor() { // Lena
