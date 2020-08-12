@@ -76,16 +76,7 @@ public class OrangeHRM_Test {
         assertEquals(expected, actual);
     }
 
-    @Test
-    public void VerifNewNewsPosted() { // asim
-        addNewNewsItem();
-        List<WebElement> topicSize = driver.findElements(By.xpath("//input[@class='formInputText']"));
-        updatesize = topicSize.size();
-        Assert.assertEquals(currentsize + differences, topicSize);
-        String expected = "Congratulations dreamRunner";
-        String actual = driver.findElement(By.xpath("//a[text()='Congratulations dreamRunner']")).getText();
-        assertEquals(expected, actual);
-    }
+   
 
     public void loginAsAdministrator() { // erdi
         driver.findElement(By.xpath("//button[@type='button']")).click();
