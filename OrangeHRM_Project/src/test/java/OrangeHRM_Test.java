@@ -1,4 +1,3 @@
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -125,9 +124,8 @@ public class OrangeHRM_Test {
         System.out.println("actualtopic: " + actualtopic);
         Assert.assertEquals(actualtopic,expectedtopic);
 
+
     }
-
-
     public void logIn1stLevelSupervisor() { // Lena
         WebElement login = driver.findElement(By.xpath("//button[@class='btn btn-primary dropdown-toggle']"));
         login.click();
@@ -148,4 +146,5 @@ public class OrangeHRM_Test {
         assertEquals(actual2, expected2);
     }
 }
+
 
