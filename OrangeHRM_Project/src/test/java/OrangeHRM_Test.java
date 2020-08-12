@@ -68,7 +68,7 @@ public class OrangeHRM_Test {
         }
     }
 
-    @Test
+    @Test(testName = "Post new post", description = "verify if new post is posted ")
     public void VerifNewNewsPostedE() { // erdi
         addNewNewsItem();
         String expected = "Congratulations dreamRunner";
