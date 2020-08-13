@@ -1,3 +1,4 @@
+import com.google.gson.stream.JsonToken;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -24,6 +25,7 @@ public class OrangeHRM_Test {
     int updatesize;
     WebDriver driver = null;
     WebDriverWait wait = null;
+    int deleteSizeFirst = 0;
 
     @BeforeMethod
     public void setUp() {
@@ -77,8 +79,18 @@ public class OrangeHRM_Test {
         assertEquals(expected, actual);
     }
 
-
     @Test(priority = 2)
+    public void getNewsSize() { // Greg
+        logIn1stLevelSupervisor();
+        // get news size for verification 16-17
+        String sizeVer = driver.findElement(By.xpath("(//div[@class='right'])[2]")).getText().trim();
+        //System.out.println(sizeVer.substring(sizeVer.length() - 2));
+        deleteSizeFirst = Integer.parseInt(sizeVer.substring(sizeVer.length() - 2));
+        System.out.println(deleteSizeFirst);
+    }
+
+
+    @Test(priority = 3)
     public void verifyDreamRunner() throws InterruptedException {  //Asim
         loginAsAdministrator();
         driver.findElement(By.xpath("//span[text()='Admin']")).click();
@@ -93,9 +105,10 @@ public class OrangeHRM_Test {
 
 
 
-    @Test(priority = 3)
+    @Test(priority = 4)
     public void verifyNewlyAdd() { // Lena
         logIn1stLevelSupervisor();
+
         // verify topic
         String actual = driver.findElement(By.xpath("//*[contains(text(),'Congratulations dreamRunner')]")).getText().trim();
         String expected = "Congratulations dreamRunner";
@@ -109,7 +122,7 @@ public class OrangeHRM_Test {
         assertEquals(actual2, expected2);
     }
 
-    @Test(priority = 4)
+    @Test(priority = 5)
     public void administration() { // Korn
         driver.findElement(By.tagName("button")).click();
         driver.findElement(By.xpath("//*[(text()='Administrator')]")).click();
@@ -130,8 +143,19 @@ public class OrangeHRM_Test {
 
     }
 
+    @Test(priority = 6) // Greg
+    public void verifyItemIsDeleted() {
+        logIn1stLevelSupervisor();
+
+        String sizeVer = driver.findElement(By.xpath("(//div[@class='right'])[2]")).getText().trim();
+        int deleteSizeSecond = Integer.parseInt(sizeVer.substring(sizeVer.length() - 1));
+        Assert.assertNotEquals(deleteSizeFirst, deleteSizeSecond);
+
+    }
+
     @AfterMethod
     public void tearDown() {
+
         driver.quit();
     }
 
