@@ -35,7 +35,7 @@ public class OrangeHRM_Test {
         wait = new WebDriverWait(driver, 20);
     }
 
-    @Test
+    @Test(priority = 0)
     public void loginAsA() { // victoria
         loginAsAdministrator();
         driver.findElement(By.xpath("//a//span[text()='Admin']")).click();
@@ -69,12 +69,77 @@ public class OrangeHRM_Test {
         }
     }
 
-    @Test(testName = "Post new post", description = "verify if new post is posted ")
+    @Test(priority = 1, testName = "Posting news", description = "verify if new post is posted ")
     public void VerifNewNewsPostedE() { // erdi
         addNewNewsItem();
         String expected = "Congratulations dreamRunner";
         String actual = driver.findElement(By.xpath("//a[text()='Congratulations dreamRunner']")).getText();
         assertEquals(expected, actual);
+    }
+
+
+    @Test(priority = 2)
+    public void verifyDreamRunner() throws InterruptedException {  //Asim
+        loginAsAdministrator();
+        driver.findElement(By.xpath("//span[text()='Admin']")).click();
+        driver.findElement(By.xpath("//span[text()='Announcements']")).click();
+        driver.findElement(By.xpath("//span[text()='News']")).click();
+        driver.switchTo().frame("noncoreIframe");
+        String expectedtopic = "Congratulations dreamRunner";
+        String actualtopic = driver.findElement(By.xpath("//td/a[text()='Congratulations dreamRunner']")).getText();
+        System.out.println("actualtopic: " + actualtopic);
+        Assert.assertEquals(actualtopic, expectedtopic);
+    }
+
+
+
+    @Test(priority = 3)
+    public void verifyNewlyAdd() { // Lena
+        logIn1stLevelSupervisor();
+        // verify topic
+        String actual = driver.findElement(By.xpath("//*[contains(text(),'Congratulations dreamRunner')]")).getText().trim();
+        String expected = "Congratulations dreamRunner";
+        assertEquals(actual, expected);
+        // verify description
+        LocalDate today = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/YYYY");
+        String formattedDate = formatter.format(today);
+        String actual2 = driver.findElement(By.xpath("//*[contains(text(),'Promotion was awarded to dreamRunner on')]")).getText().trim();
+        String expected2 = "Promotion was awarded to dreamRunner on " + formattedDate;
+        assertEquals(actual2, expected2);
+    }
+
+    @Test(priority = 4)
+    public void administration() { // Korn
+        driver.findElement(By.tagName("button")).click();
+        driver.findElement(By.xpath("//*[(text()='Administrator')]")).click();
+        driver.findElement(By.xpath("//span[contains(text(),'Admin')]")).click();
+        driver.findElement(By.xpath("//span[contains(text(),'Announcements')]")).click();
+        driver.findElement(By.xpath("//span[contains(text(),'News')]")).click();
+        driver.switchTo().frame("noncoreIframe");
+        driver.findElement(By.xpath("//*[@id='resultTable']/tbody/tr[1]/td[1]/label")).click();
+        driver.findElement(By.xpath("//*[@id='frmList_ohrmListComponent_Menu']/i")).click();
+        driver.findElement(By.xpath("//*[@id='newsDelete']")).click();
+        driver.findElement(By.xpath("//*[@id='news-delete-button']")).click();
+        List<WebElement> newstopic = driver.findElements(By.xpath("//a[@class='newsTopic']"));
+        for (int i = 0; i < newstopic.size(); i++) {
+            if ((newstopic.get(i).getText().contains("Congratulations dreamRunner")) || i == newstopic.size() - 1) {
+                System.out.println("DELETED");
+            }
+        }
+
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        driver.quit();
+    }
+
+    public void logIn1stLevelSupervisor() { // Lena
+        WebElement login = driver.findElement(By.xpath("//button[@class='btn btn-primary dropdown-toggle']"));
+        login.click();
+        WebElement levelSupervisor = driver.findElement(By.xpath("//a[text()='1st Level Supervisor']"));
+        levelSupervisor.click();
     }
 
     public void loginAsAdministrator() { // erdi
@@ -115,67 +180,6 @@ public class OrangeHRM_Test {
 
     }
 
-    @Test
-    public void verifyDreamRunner() throws InterruptedException {  //Asim
-        loginAsAdministrator();
-        driver.findElement(By.xpath("//span[text()='Admin']")).click();
-        driver.findElement(By.xpath("//span[text()='Announcements']")).click();
-        driver.findElement(By.xpath("//span[text()='News']")).click();
-        driver.switchTo().frame("noncoreIframe");
-        String expectedtopic = "Congratulations dreamRunner";
-        String actualtopic = driver.findElement(By.xpath("//td/a[text()='Congratulations dreamRunner']")).getText();
-        System.out.println("actualtopic: " + actualtopic);
-        Assert.assertEquals(actualtopic, expectedtopic);
-    }
-
-    @Test
-    public void logIn1stLevelSupervisor() { // Lena
-        WebElement login = driver.findElement(By.xpath("//button[@class='btn btn-primary dropdown-toggle']"));
-        login.click();
-        WebElement levelSupervisor = driver.findElement(By.xpath("//a[text()='1st Level Supervisor']"));
-        levelSupervisor.click();
-    }
-    @Test
-    public void verifyNewlyAdd() { // Lena
-        logIn1stLevelSupervisor();
-        // verify topic
-        String actual = driver.findElement(By.xpath("//*[contains(text(),'Congratulations dreamRunner')]")).getText().trim();
-        String expected = "Congratulations dreamRunner";
-        assertEquals(actual, expected);
-        // verify description
-        LocalDate today = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/YYYY");
-        String formattedDate = formatter.format(today);
-        String actual2 = driver.findElement(By.xpath("//*[contains(text(),'Promotion was awarded to dreamRunner on')]")).getText().trim();
-        String expected2 = "Promotion was awarded to dreamRunner on " + formattedDate;
-        assertEquals(actual2, expected2);
-    }
-
-    @Test
-    public void administration() { // Korn
-        driver.findElement(By.tagName("button")).click();
-        driver.findElement(By.xpath("//*[(text()='Administrator')]")).click();
-        driver.findElement(By.xpath("//span[contains(text(),'Admin')]")).click();
-        driver.findElement(By.xpath("//span[contains(text(),'Announcements')]")).click();
-        driver.findElement(By.xpath("//span[contains(text(),'News')]")).click();
-        driver.switchTo().frame("noncoreIframe");
-        driver.findElement(By.xpath("//*[@id='resultTable']/tbody/tr[1]/td[1]/label")).click();
-        driver.findElement(By.xpath("//*[@id='frmList_ohrmListComponent_Menu']/i")).click();
-        driver.findElement(By.xpath("//*[@id='newsDelete']")).click();
-        driver.findElement(By.xpath("//*[@id='news-delete-button']")).click();
-        List<WebElement> newstopic = driver.findElements(By.xpath("//a[@class='newsTopic']"));
-        for (int i = 0; i < newstopic.size(); i++) {
-            if ((newstopic.get(i).getText().contains("Congratulations dreamRunner")) || i == newstopic.size() - 1) {
-                System.out.println("DELETED");
-            }
-        }
-
-    }
-
-    @AfterMethod
-    public void tearDown() {
-        driver.quit();
-    }
 }
 
 
